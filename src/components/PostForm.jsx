@@ -35,7 +35,7 @@ class PostForm extends Component {
     render() {
         return (
             <form onSubmit={this.submitHandler} className='mb-3 row'>
-                <div className="col-8">
+                <div className="col-10">
                     <label htmlFor="title" className="form-label">Post Title</label>
                     <input
                         type="text"

@@ -18,7 +18,7 @@ function App() {
         </div>
         <div className="col">
           <h2>API посты</h2>
-          <FetchedPost posts={[]} />
+          <FetchedPost />
         </div>
       </div>
     </div>
