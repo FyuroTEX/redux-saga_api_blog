@@ -14,7 +14,7 @@ const FetchedPost = () => {
         return <Loader />
     }
 
-    if (!posts.length) {
+    if (posts === undefined || !posts.length) {
         return (
             <>
                 <p>Has no posts</p>
