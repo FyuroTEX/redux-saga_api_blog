@@ -3,7 +3,7 @@ import { rootReducer } from './redux/rootReducer';
 import thunk from 'redux-thunk';
 import { badWordsMiddleware } from './redux/customMiddleware/mdwBadWords';
 import createSagaMiddleware from 'redux-saga';
-import { sagaWatcher } from './redux/sagas/sagas';
+import { rootSaga } from './redux/rootSaga';
 
 const saga = createSagaMiddleware();
 
@@ -12,11 +12,13 @@ const preloadedState = localStorage.getItem('savedPosts') ? JSON.parse(localStor
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 const composeEnchancer = devTools ? devTools : compose;
 
-const middleware = [thunk, saga, badWordsMiddleware];
+const middleware = [saga, thunk, badWordsMiddleware];
 
-export const store = createStore(rootReducer, preloadedState, composeEnchancer(applyMiddleware(...middleware)));
+const store = createStore(rootReducer, preloadedState, composeEnchancer(applyMiddleware(...middleware)));
 
-saga.run(sagaWatcher);
+saga.run(rootSaga);
+
+export { store, saga };
 
 //Write to localStorage
 //localStorage.removeItem('myPosts');

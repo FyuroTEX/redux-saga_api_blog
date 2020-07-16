@@ -1,13 +1,11 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
-import { REQUEST_POSTS, FETCH_POST } from './../reducers/types';
-import { showLoader, hideLoader, showAlert } from './../actions/actions';
+import { put, call } from 'redux-saga/effects';
+import { FETCH_POST } from '../../reducers/types';
+import { showLoader, hideLoader, showAlert } from './../../actions/actions';
 
 
-export function* sagaWatcher() {
-    yield takeEvery(REQUEST_POSTS, sagaWorker);
-};
 
-function* sagaWorker() {
+
+export function* sagaWorker() {
     try {
         yield put(showLoader());
         const payload = yield call(fetchPosts);
@@ -23,4 +21,4 @@ function* sagaWorker() {
 async function fetchPosts() {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=7');
     return await response.json();
-}
+};
