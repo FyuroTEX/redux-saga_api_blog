@@ -1,5 +1,6 @@
-import { sagaWatcher } from "./sagas/watcher/sagasWatcher";
+import { watchPosts } from "./sagas/watcher/sagasWatcher";
+import { all, call } from 'redux-saga/effects';
 
 export function* rootSaga() {
-    yield sagaWatcher();
+    yield all([call(watchPosts)]);
 };

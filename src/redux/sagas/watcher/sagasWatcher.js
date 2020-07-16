@@ -1,7 +1,11 @@
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery, all, call } from 'redux-saga/effects';
 import { REQUEST_POSTS } from './../../reducers/types';
 import { sagaWorker } from '../worker/sagaWorker';
 
-export function* sagaWatcher() {
+function* sagaWatcher() {
     yield takeEvery(REQUEST_POSTS, sagaWorker);
+};
+
+export function* watchPosts() {
+    yield all([call(sagaWatcher)]);
 };
