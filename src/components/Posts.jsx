@@ -3,6 +3,7 @@ import Post from './Post';
 import { connect } from 'react-redux';
 
 const Posts = ({ posts }) => {
+
     if (posts === undefined || !posts.length) {
         return <p>Has no posts</p>;
     };

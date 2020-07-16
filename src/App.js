@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostForm from './components/PostForm';
 import Posts from './components/Posts';
 import FetchedPost from './components/FetchedPosts';
+import WOW from 'wowjs';
 
 function App() {
+    useEffect(() => {
+        const wow = new WOW.WOW({
+            live: false,
+            mobile: false
+        });
+        wow.init();
+    });
   return (
     <div className="container pt-3">
       <div className="row">

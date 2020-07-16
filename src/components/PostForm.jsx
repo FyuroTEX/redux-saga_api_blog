@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createPost, showAlert, clearPosts } from './../redux/actions/actions';
 import { Alert } from './Alert';
 
+
 class PostForm extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +11,7 @@ class PostForm extends Component {
             title: ''
         };
     };
+ 
     submitHandler = (event) => {
         event.preventDefault();
 
