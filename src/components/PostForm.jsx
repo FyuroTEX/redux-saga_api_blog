@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createPost, showAlert } from './../redux/actions/actions';
+import { createPost, showAlert, clearPosts } from './../redux/actions/actions';
 import { Alert } from './Alert';
 
 class PostForm extends Component {
@@ -14,6 +14,7 @@ class PostForm extends Component {
         event.preventDefault();
 
         const { title } = this.state;
+        
         if (!title.trim()) {
             return this.props.showAlert(`Title post can't be empty`);
         };
@@ -34,11 +35,12 @@ class PostForm extends Component {
         }));
     };
     render() {
+        const { clearPosts, alertMsg } = this.props;
         return (
             <form onSubmit={this.submitHandler} className='mb-3 row'>
-                {this.props.alertMsg && <Alert alertMsg={this.props.alertMsg} />}
+                {alertMsg && <Alert alertMsg={alertMsg} />}
                 <div className="col-10">
-                    <label htmlFor="title" className="form-label">Post Title</label>
+                    <label htmlFor="title" className="form-label">Create new post title</label>
                     <input
                         type="text"
                         placeholder="Post Title"
@@ -50,8 +52,9 @@ class PostForm extends Component {
                     />
                 </div>
 
-                <div className="col-2 d-flex align-items-end">
+                <div className="col-2 d-flex align-items-end justify-content-around">
                     <button className="btn btn-success" type='submit'>Create</button>
+                    <button className="btn btn-danger" onClick={clearPosts} type='button'>Clear&nbsp;data</button>
                 </div>
 
             </form>
@@ -61,7 +64,8 @@ class PostForm extends Component {
 
 const mapDispatchToProps = {
     createPost,
-    showAlert
+    showAlert,
+    clearPosts
 };
 const mapStateToProps = (state) => ({
     alertMsg: state.app.alert
