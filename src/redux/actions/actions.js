@@ -1,4 +1,4 @@
-import { CREATE_POST, FETCH_POST, SHOW_LOADER, HIDE_LOADER } from './../reducers/types';
+import { CREATE_POST, FETCH_POST, SHOW_LOADER, HIDE_LOADER, SHOW_ALERT, HIDE_ALERT } from './../reducers/types';
 
 export function createPost(post) {
     return {
@@ -10,18 +10,35 @@ export function createPost(post) {
 export function showLoader() {
     return { type: SHOW_LOADER };
 };
-
 export function hideLoader() {
     return { type: HIDE_LOADER };
+};
+export function showAlert(text) {
+    return dispatch => {
+        dispatch({ type: SHOW_ALERT, payload: text });
+        setTimeout(() => {
+            dispatch(hideAlert());
+        }, 2500);
+    };
+};
+
+export function hideAlert() {
+    return { type: HIDE_ALERT };
 };
 
 export function fetchPosts() {
     return async (dispatch) => {
-        dispatch(showLoader());
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
-        const json = await response.json();
-        dispatch({ type: FETCH_POST, payload: json });
-        dispatch(hideLoader())
+        try {
+            dispatch(showLoader());
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+            const json = await response.json();
+            dispatch({ type: FETCH_POST, payload: json });
+            dispatch(hideLoader())
+        } catch (error) {
+            dispatch(showAlert(error.message));
+            dispatch(hideLoader());
+        };
+
     };
 };
 

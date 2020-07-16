@@ -9,9 +9,11 @@ const middleware = [thunk];
 
 export const store = createStore(rootReducer, preloadedState, composeEnchancer(applyMiddleware(...middleware)));
 
-store.subscribe(() => {
-    const state = store.getState();
 
+//Write to localStorage
+//localStorage.removeItem('myPosts');
+// store.subscribe(() => {
+//     const state = store.getState();
 
-    localStorage.setItem('myPosts', JSON.stringify(state));
-})
+//     localStorage.setItem('myPosts', JSON.stringify(state));
+// })
