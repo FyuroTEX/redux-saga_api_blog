@@ -8,4 +8,5 @@ function* sagaWatcher() {
 
 export function* watchPosts() {
     yield all([call(sagaWatcher)]);
+    // yield all([call(sagaWatcher), call(sagaWatcher)]);
 };

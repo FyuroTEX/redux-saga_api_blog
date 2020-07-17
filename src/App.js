@@ -8,7 +8,7 @@ function App() {
     useEffect(() => {
         const wow = new WOW.WOW({
             live: false,
-            mobile: false
+            mobile: true
         });
         wow.init();
     });
